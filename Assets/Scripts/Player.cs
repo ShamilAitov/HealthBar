@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _health;
 
+    public UnityAction action;
     private float _maxHealth;
     private float _minHealth = 0;
 
@@ -17,20 +19,15 @@ public class Player : MonoBehaviour
         _maxHealth = _health;
     }
 
-    public void ReducedHealth(float damage)
+    public void DecreaseHealth(float damage)
     {
-        if (_health > _minHealth) 
-        {
-            _health -= damage;
-        }
+        _health = Mathf.Clamp(_health - damage, _minHealth, _maxHealth);
+        action?.Invoke();
     }
 
-    public void IncreasedHealth(float health)
+    public void ImprovingHealth(float health)
     {
-        if (_health < _maxHealth)
-        {
-            _health += health;
-        }
-        
+        _health = Mathf.Clamp(_health + health, _minHealth, _maxHealth);
+        action?.Invoke();
     }
 }
