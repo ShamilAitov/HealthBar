@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour
 
     private void OnDisable()
     {
-        _player.action -= UpdateHealthValues;
+        _player.HealthUpdate -= UpdateHealthValues;
     }
 
     public void Start()
@@ -28,13 +28,13 @@ public class HealthBar : MonoBehaviour
     public void ImprovingHealth()
     {
         _player.ImprovingHealth(_health);
-        _player.action += UpdateHealthValues;
+        _player.HealthUpdate += UpdateHealthValues;
     }
 
     public void DecreaseHealth()
     {
         _player.DecreaseHealth(_damage);
-        _player.action += UpdateHealthValues;
+        _player.HealthUpdate += UpdateHealthValues;
     }
 
     private void UpdateHealthValues()
