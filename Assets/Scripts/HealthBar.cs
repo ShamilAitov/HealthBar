@@ -12,18 +12,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Player _player;
 
     private Slider _slider;
-    private float _damage = 10;
-    private float _health = 10;
     private float _sliderChangeTime = 1;
 
     private void OnDisable()
     {
-        _player.HealthUpdate -= UpdateHealthValues;
+        _player.EventHealthUpdate -= UpdateHealthValues;
     }
 
     private void OnEnable()
     {
-        _player.HealthUpdate += UpdateHealthValues;
+        _player.EventHealthUpdate += UpdateHealthValues;
     }
 
     public void Start()
@@ -31,16 +29,6 @@ public class HealthBar : MonoBehaviour
         _slider = GetComponent<Slider>();
         _slider.maxValue = _player.Health;
         _slider.value = _slider.maxValue;
-    }
-
-    public void ImprovingHealth()
-    {
-        _player.ImprovingHealth(_health);
-    }
-
-    public void DecreaseHealth()
-    {
-        _player.DecreaseHealth(_damage);
     }
 
     private void UpdateHealthValues()
