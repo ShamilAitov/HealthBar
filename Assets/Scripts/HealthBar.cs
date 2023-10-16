@@ -16,12 +16,12 @@ public class HealthBar : MonoBehaviour
 
     private void OnDisable()
     {
-        _player.EventHealthUpdate -= UpdateHealthValues;
+        _player.HealthUpdate -= UpdateHealthValues;
     }
 
     private void OnEnable()
     {
-        _player.EventHealthUpdate += UpdateHealthValues;
+        _player.HealthUpdate += UpdateHealthValues;
     }
 
     public void Start()
